@@ -13,34 +13,34 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
 " Snippet handler
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " snippets for ultisnips
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 " supertab for completion
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 
 " YouCompleteMe auto-completion
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " More clever matching for % key
 Plug 'tmhedberg/matchit'
 
 " JavaScript syntax highlighting
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 
 " jsx syntax highlighting
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 
 " Language server protocol linter
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " fugitive.vim git integration
 Plug 'tpope/vim-fugitive'
 
 " Clojure highlight
-Plug 'guns/vim-clojure-static'
+" Plug 'guns/vim-clojure-static'
 
 " Surround
 Plug 'tpope/vim-surround'
@@ -79,6 +79,11 @@ set undolevels=1000
 
 " highlight search results
 set hlsearch
+
+set list
+set listchars=tab:··>,trail:·
+
+hi SpecialKey ctermfg=darkgrey
 
 " make delimitMate insert another line when 
 " closing curlys for example
@@ -160,6 +165,11 @@ augroup json_macros " {
 	autocmd!
 	autocmd FileType json :nnoremap <localleader>fm :%!python -m json.tool<CR>
 augroup END " }
+
+augroup haskell_stuff
+	autocmd!
+	autocmd BufNewFile,BufRead *.hsc set ft=haskell
+augroup END
 
 " Function for toggling the relative line numbers
 function ToggleRelative()
