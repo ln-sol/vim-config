@@ -13,34 +13,34 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
 " Snippet handler
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 " snippets for ultisnips
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 
 " supertab for completion
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 
 " YouCompleteMe auto-completion
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " More clever matching for % key
 Plug 'tmhedberg/matchit'
 
 " JavaScript syntax highlighting
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 
 " jsx syntax highlighting
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 
 " Language server protocol linter
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " fugitive.vim git integration
 Plug 'tpope/vim-fugitive'
 
 " Clojure highlight
-Plug 'guns/vim-clojure-static'
+" Plug 'guns/vim-clojure-static'
 
 " Surround
 Plug 'tpope/vim-surround'
@@ -50,6 +50,9 @@ Plug 'tpope/vim-repeat'
 
 " Ack.vim -- can use ag with this
 Plug 'mileszs/ack.vim'
+
+" Haskell syntax
+Plug 'neovimhaskell/haskell-vim'
 
 call plug#end()
 " All of your Plugins must be added before the following line
@@ -79,6 +82,12 @@ set undolevels=1000
 
 " highlight search results
 set hlsearch
+
+" show tabs and spaces
+set list
+set listchars=tab:··>,trail:·
+
+hi SpecialKey ctermfg=DarkGrey
 
 " make delimitMate insert another line when 
 " closing curlys for example
@@ -161,6 +170,12 @@ augroup json_macros " {
 	autocmd FileType json :nnoremap <localleader>fm :%!python -m json.tool<CR>
 augroup END " }
 
+" Haskell
+augroup hs_stuff " {
+	autocmd!
+	autocmd BufNewFile,BufRead *.hsc set filetype=haskell
+augroup END " }
+
 " Function for toggling the relative line numbers
 function ToggleRelative()
 	if &relativenumber==1
@@ -185,9 +200,23 @@ endfunction
 
 noremap <leader>g :call GrepAskForDir(expand("<cword>"))<CR>
 
+function SetIdentWidth()
+	call inputsave()
+	let l:width = input('Set ident: ')
+	call inputrestore()
+	if l:width==''
+		set tabstop=8 shiftwidth=8 noexpandtab
+	else
+		let l:numw = str2nr(l:width, 10)
+		execute 'set softtabstop=' . l:numw . ' shiftwidth=' . l:numw . ' expandtab'
+	endif
+endfunction
+
+noremap <leader>i :call SetIdentWidth()<CR>
+
 " Automatically user relative lines when not in insert mode 
-au InsertLeave * :set relativenumber
-au InsertEnter * :set norelativenumber
+" au InsertLeave * :set relativenumber
+" au InsertEnter * :set norelativenumber
 
 
 " Syntastic settings
@@ -216,3 +245,7 @@ noremap <leader>h :nohlsearch<CR>
 if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
 endif
+
+digraphs \- 8866
+digraphs -\ 8867
+
