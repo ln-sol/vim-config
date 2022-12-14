@@ -83,6 +83,7 @@ set undolevels=1000
 " highlight search results
 set hlsearch
 
+" show tabs and spaces
 set list
 set listchars=tab:>··,trail:·
 
@@ -169,11 +170,13 @@ augroup json_macros " {
 	autocmd FileType json :nnoremap <localleader>fm :%!python -m json.tool<CR>
 augroup END " }
 
+" Haskell
 augroup haskell_stuff " {
 	autocmd!
 	autocmd BufNewFile,BufRead *.hsc set ft=haskell
 augroup END " }
 
+" C
 augroup c_stuff " {
 	autocmd!
 	autocmd BufNewFile,BufRead *.h set ft=c
@@ -203,9 +206,23 @@ endfunction
 
 noremap <leader>g :call GrepAskForDir(expand("<cword>"))<CR>
 
+function SetIdentWidth()
+	call inputsave()
+	let l:width = input('Set ident: ')
+	call inputrestore()
+	if l:width==''
+		set tabstop=8 shiftwidth=8 noexpandtab
+	else
+		let l:numw = str2nr(l:width, 10)
+		execute 'set softtabstop=' . l:numw . ' shiftwidth=' . l:numw . ' expandtab'
+	endif
+endfunction
+
+noremap <leader>i :call SetIdentWidth()<CR>
+
 " Automatically user relative lines when not in insert mode 
-au InsertLeave * :set relativenumber
-au InsertEnter * :set norelativenumber
+" au InsertLeave * :set relativenumber
+" au InsertEnter * :set norelativenumber
 
 
 " Syntastic settings
@@ -234,3 +251,7 @@ noremap <leader>h :nohlsearch<CR>
 if executable('ag')
 	let g:ackprg = 'ag --vimgrep'
 endif
+
+digraphs \- 8866
+digraphs -\ 8867
+
