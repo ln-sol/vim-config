@@ -84,7 +84,7 @@ set undolevels=1000
 set hlsearch
 
 set list
-set listchars=tab:··>,trail:·
+set listchars=tab:>··,trail:·
 
 hi SpecialKey ctermfg=darkgrey
 
@@ -169,10 +169,15 @@ augroup json_macros " {
 	autocmd FileType json :nnoremap <localleader>fm :%!python -m json.tool<CR>
 augroup END " }
 
-augroup haskell_stuff
+augroup haskell_stuff " {
 	autocmd!
 	autocmd BufNewFile,BufRead *.hsc set ft=haskell
-augroup END
+augroup END " }
+
+augroup c_stuff " {
+	autocmd!
+	autocmd BufNewFile,BufRead *.h set ft=c
+augroup END " }
 
 " Function for toggling the relative line numbers
 function ToggleRelative()
