@@ -51,6 +51,9 @@ Plug 'tpope/vim-repeat'
 " Ack.vim -- can use ag with this
 Plug 'mileszs/ack.vim'
 
+" Haskell syntax
+Plug 'neovimhaskell/haskell-vim'
+
 call plug#end()
 " All of your Plugins must be added before the following line
 
