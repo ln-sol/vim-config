@@ -219,6 +219,7 @@ function SetIdentWidth()
 endfunction
 
 noremap <leader>i :call SetIdentWidth()<CR>
+noremap <leader>r :call ToggleRelative()<CR>
 
 " Automatically user relative lines when not in insert mode 
 " au InsertLeave * :set relativenumber
@@ -255,3 +256,5 @@ endif
 digraphs \- 8866
 digraphs -\ 8867
 
+" Markdown
+let g:markdown_fenced_languages = ['python', 'typescript', 'javascript', 'haskell']
