@@ -54,6 +54,9 @@ Plug 'mileszs/ack.vim'
 " Haskell syntax
 Plug 'neovimhaskell/haskell-vim'
 
+" Typescript syntax
+Plug 'leafgarland/typescript-vim'
+
 call plug#end()
 " All of your Plugins must be added before the following line
 
@@ -182,6 +185,11 @@ augroup c_stuff " {
 	autocmd BufNewFile,BufRead *.h set ft=c
 augroup END " }
 
+augroup verona_stuff " {
+	autocmd!
+	autocmd BufNewFile,BufRead *.verona set ft=typescript
+augroup end " }
+
 " Function for toggling the relative line numbers
 function ToggleRelative()
 	if &relativenumber==1
@@ -255,6 +263,15 @@ endif
 
 digraphs \- 8866
 digraphs -\ 8867
+digraphs !( 8840
+digraphs !) 8841
+digraphs /< 10216
+digraphs /> 10217
+digraphs mt 8614
+digraphs /( 8713
+digraphs /) 8716
 
 " Markdown
 let g:markdown_fenced_languages = ['python', 'typescript', 'javascript', 'haskell']
+
+colorscheme habamax
